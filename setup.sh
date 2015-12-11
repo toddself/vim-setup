@@ -4,8 +4,9 @@ git submodule update
 
 if [ -e ~/.vimrc ]; then
   rm ~/.vimrc
-  ln -s $(pwd)/.vimrc ~/.vimrc
 fi
+
+ln -s $(pwd)/.vimrc ~/.vimrc
 
 if [ -d ~/.vim ]; then
   rm -rf ~/.vim/*
