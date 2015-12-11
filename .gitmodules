@@ -1,0 +1,27 @@
+[submodule ".vim/bundle/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = git@github.com:kien/ctrlp.vim
+[submodule ".vim/bundle/ag.vim"]
+	path = .vim/bundle/ag.vim
+	url = git@github.com:rking/ag.vim
+[submodule ".vim/bundle/gundo.vim"]
+	path = .vim/bundle/gundo.vim
+	url = git@github.com:sjl/gundo.vim
+[submodule ".vim/bundle/syntastic.vim"]
+	path = .vim/bundle/syntastic.vim
+	url = git@github.com:scrooloose/syntastic
+[submodule ".vim/bundle/editorconfig-vim.git"]
+	path = .vim/bundle/editorconfig-vim.git
+	url = git@github.com:editorconfig/editorconfig-vim.git
+[submodule ".vim/bundle/vim-multiple-cursors"]
+	path = .vim/bundle/vim-multiple-cursors
+	url = git@github.com:terryma/vim-multiple-cursors
+[submodule ".vim/bundle/vim-go"]
+	path = .vim/bundle/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = git@github.com:kchmck/vim-coffee-script
+[submodule ".vim/bundle/vim-javascript-syntax"]
+	path = .vim/bundle/vim-javascript-syntax
+	url = git@github.com:jelera/vim-javascript-syntax
