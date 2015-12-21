@@ -25,9 +25,17 @@ set foldmethod=indent "fold on indent level
 nnoremap j gj
 nnoremap k gk
 
-" highlight over 80 character lines
-highlight OverLength ctermbg=darkred 
-call matchadd('OverLength', '\%81v', 100)
+" show statusline
+set laststatus=2
+
+" airline settings
+let g:airline_left_sep="|"
+let g:airline_right_sep="|"
+
+
+" highlight column 80
+let &colorcolumn=join(range(81,999),",")
+let &colorcolumn="80,".join(range(400,999),",")
 
 " jk is escape
 inoremap jk <esc>
