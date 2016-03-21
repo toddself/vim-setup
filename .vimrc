@@ -28,6 +28,9 @@ nnoremap k gk
 " show statusline
 set laststatus=2
 
+" buffer switcher: F5 then buffer number
+nnoremap <F5> :buffers<CR>:buffer<Space>
+
 " airline settings
 let g:airline_left_sep="|"
 let g:airline_right_sep="|"
