@@ -73,5 +73,9 @@ let g:syntastic_html_checkers=['']
 nnoremap :St :SyntasticToggleMode<CR>
 
 if has("gui_running")
-  set guifont=Hack:h12
+  if has("unix")
+    set guifont=Hack\ 12
+  else
+    set guifont=Hack:h12
+  endif
 endif
