@@ -72,10 +72,11 @@ let g:syntastic_enable_highlighting=1
 let g:syntastic_html_checkers=['']
 nnoremap :St :SyntasticToggleMode<CR>
 
+let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
-  if has("unix")
-    set guifont=Hack\ 12
-  else
+  if os == "Darwin"
     set guifont=Hack:h12
+  else
+    set guifont=Hack\ 12
   endif
 endif
