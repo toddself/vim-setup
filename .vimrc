@@ -34,9 +34,6 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 " airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme='murmur'
-" let g:airline_left_sep="|"
-" let g:airline_right_sep="|"
-
 
 " highlight column 80
 let &colorcolumn=join(range(81,999),",")
@@ -46,9 +43,6 @@ let &colorcolumn="80,".join(range(400,999),",")
 inoremap jk <esc>
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
-
-"save session
-nnoremap <leader>s :mksession<CR>
 
 call pathogen#infect() " use pathogen
 colorscheme molokai
@@ -66,6 +60,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " syntastic settings
 let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
