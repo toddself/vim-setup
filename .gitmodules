@@ -58,9 +58,3 @@
 [submodule ".vim/bundle/typescript-vim"]
 	path = .vim/bundle/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim
-[submodule ".vim/bundle/tsuquyomi"]
-	path = .vim/bundle/tsuquyomi
-	url = git@github.com:quramy/tsuquyomi
-[submodule ".vim/bundle/vimproc.vim"]
-	path = .vim/bundle/vimproc.vim
-	url = git@github.com:shougo/vimproc.vim
