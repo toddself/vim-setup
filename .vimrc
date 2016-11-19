@@ -58,9 +58,16 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
+" tsc
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = '--jsx=react'
+autocmd FileType typescript :set makeprg=tsc
+
 " syntastic settings
 let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_typescript_checkers = ['tsc']
+let g:syntastic_typescript_tsc_args = '--jsx react --experimentalDecorators'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
