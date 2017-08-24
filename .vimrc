@@ -1,3 +1,5 @@
+set guioptions-=m
+set guioptions-=T
 syntax enable "sytnax processing
 set tabstop=2 "visual spaces per TAB
 set softtabstop=2 "spaces used when you hit tab
