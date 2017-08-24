@@ -27,6 +27,9 @@ set foldmethod=indent "fold on indent level
 nnoremap j gj
 nnoremap k gk
 
+" pull in pr format
+nnoremap <leader>pr :read !curl -s https://gist.githubusercontent.com/lrlna/92cc12bfc3c4d968eb6d9b15025a8ad3/raw/f3471e0383305f4868f2775caf8edb3c0000d8e9/scriptoPR<CR><CR>
+
 " show statusline
 set laststatus=2
 
