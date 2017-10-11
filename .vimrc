@@ -61,6 +61,7 @@ nnoremap <leader>P :CtrlP<CR>
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " tsc
 let g:typescript_compiler_binary = 'tsc'
