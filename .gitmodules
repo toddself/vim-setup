@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/ack.vim"]
 	path = .vim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim
+[submodule ".vim/bundle/vim-js-pretty-template"]
+	path = .vim/bundle/vim-js-pretty-template
+	url = git@github.com:quramy/vim-js-pretty-template
