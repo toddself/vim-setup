@@ -56,11 +56,6 @@ let g:molokai_original = 1
 " open ag.vim
 nnoremap <leader>a :Ag
 
-" jspretemp
-call jspretmpl#register_tag('html','html')
-call jspretmpl#register_tag('css', 'css')
-autocmd FileType javascript JsPreTmpl html
-
 "CtrlP settings
 nnoremap <leader>P :CtrlP<CR>
 let g:ctrlp_match_window = 'bottom,order:ttb'
