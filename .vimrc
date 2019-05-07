@@ -1,3 +1,5 @@
+set vb
+set t_vb=
 set guioptions-=m
 set guioptions-=T
 syntax enable "sytnax processing
@@ -9,6 +11,8 @@ set number "show line numbers
 set showcmd "show command in bottom bar
 set ruler "show cursor position
 filetype indent on "load file-type specific indent files
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 set wildmenu "visual autocomplete
 set lazyredraw "redraw only when needed
 set showmatch "highlight matching parens
@@ -67,22 +71,14 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = '--jsx=react'
 autocmd FileType typescript :set makeprg=tsc
-
-" syntastic settings
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_json_checkers = ['jsonlint']
-let g:syntastic_typescript_checkers = ['tsc']
-let g:syntastic_typescript_tsc_args = '--jsx react --experimentalDecorators'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_highlighting=1
-let g:syntastic_html_checkers=['']
-nnoremap :St :SyntasticToggleMode<CR>
+let g:tsuquyomi_completion_detail = 1
+autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
+autocmd FileType typescript nmap <buffer> <Leader>E <Plug>(TsuquyomiRenameSymbolC)
 
 let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
+  set ballooneval
+  autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
   if os == "Darwin"
     set guifont=Hack:h12
   else

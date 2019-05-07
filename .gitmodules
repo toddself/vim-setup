@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/gundo.vim"]
 	path = .vim/bundle/gundo.vim
 	url = git@github.com:sjl/gundo.vim
-[submodule ".vim/bundle/syntastic.vim"]
-	path = .vim/bundle/syntastic.vim
-	url = git@github.com:scrooloose/syntastic
 [submodule ".vim/bundle/editorconfig-vim.git"]
 	path = .vim/bundle/editorconfig-vim.git
 	url = git@github.com:editorconfig/editorconfig-vim.git
@@ -49,3 +46,12 @@
 [submodule ".vim/bundle/rust.vim"]
 	path = .vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule ".vim/bundle/ale"]
+	path = .vim/bundle/ale
+	url = git@github.com:w0rp/ale
+[submodule ".vim/bundle/typescript-vim"]
+	path = .vim/bundle/typescript-vim
+	url = git@github.com:leafgarland/typescript-vim
+[submodule ".vim/bundle/tsquyomi"]
+	path = .vim/bundle/tsquyomi
+	url = git@github.com:Quramy/tsuquyomi.git
