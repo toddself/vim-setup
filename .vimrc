@@ -205,8 +205,7 @@ autocmd FileType * call LC_maps()
 
 silent! colorscheme molokai
 
-" ale
-let g:ale_linters = {}
+autocmd FileType ruby,typescript,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 
 let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
