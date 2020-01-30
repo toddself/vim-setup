@@ -1,84 +1,200 @@
+"*****************************************************************************
+"" Vim-Plug core
+"*****************************************************************************
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+
+let g:vim_bootstrap_langs = "go,html,javascript,ruby,rust,typescript"
+let g:vim_bootstrap_editor = "vim"				" nvim or vim
+
+if !filereadable(vimplug_exists)
+  if !executable("curl")
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
+" Required:
+call plug#begin(expand('~/.vim/plugged'))
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/grep.vim'
+Plug 'vim-scripts/CSApprox'
+Plug 'Raimondi/delimitMate'
+Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-rhubarb'
+
+" Make autocomplete happen 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/neosnippet.vim'
+
+if isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+else
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
+
+let g:make = 'gmake'
+if exists('make')
+        let g:make = 'make'
+endif
+Plug 'Shougo/vimproc.vim', {'do': g:make}
+
+" Theme
+Plug 'tomasr/molokai'
+
+" Language support
+
+" go
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
+
+" javascript
+Plug 'jelera/vim-javascript-syntax'
+
+" ruby
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-projectionist'
+Plug 'thoughtbot/vim-rspec'
+Plug 'ecomba/vim-ruby-refactoring'
+
+" rust
+Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+
+call plug#end()
+
+" Required:
+filetype plugin indent on
+
+" Basic Setup
+"" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+set ttyfast
+
+"" Fix backspace indent
+set backspace=indent,eol,start
+
+"" Tabs. May be overridden by autocmd rules
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2
+set expandtab
+
+"" Map leader to ,
+let mapleader=','
+
+"" Enable hidden buffers
+set hidden
+
+"" Searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+" turn off highlights
+nnoremap <leader><space> :nohlsearch<CR>
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" disable annoying bells and gui options
 set vb
 set t_vb=
 set guioptions-=m
 set guioptions-=T
-syntax enable "sytnax processing
-set tabstop=2 "visual spaces per TAB
-set softtabstop=2 "spaces used when you hit tab
-set shiftwidth=2 "reindent
-set expandtab "tabs are spaces
-set number "show line numbers
-set showcmd "show command in bottom bar
-set ruler "show cursor position
-filetype indent on "load file-type specific indent files
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-set wildmenu "visual autocomplete
-set lazyredraw "redraw only when needed
-set showmatch "highlight matching parens
-set incsearch "search as characters are entered
-set hlsearch "highlight those matches
-let mapleader="," " leader becomes a comma
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
-set foldenable "enable folding
-set foldlevelstart=99 "open most folds
-set foldnestmax=10 " max fold nexting
-"space open/closes folds
-nnoremap <space> za
-set foldmethod=indent "fold on indent level
-" move vertically by lines on terminal
-nnoremap j gj
-nnoremap k gk
 
-" pull in pr format
-nnoremap <leader>pr :read !curl -s https://gist.githubusercontent.com/lrlna/92cc12bfc3c4d968eb6d9b15025a8ad3/raw/f3471e0383305f4868f2775caf8edb3c0000d8e9/scriptoPR<CR><CR>
-
-" show statusline
-set laststatus=2
-
-" buffer switcher: F5 then buffer number
-nnoremap <F5> :buffers<CR>:buffer<Space>
-
-" airline settings
-let g:airline_powerline_fonts = 1
-let g:airline_theme='murmur'
-
-" highlight column 80
+"" Visual
+syntax on
+set number 
+set showcmd
+set ruler
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
 
-" jk is escape
-inoremap jk <esc>
-" toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
+"" Use modeline overrides
+set modeline
+set modelines=10
 
-call pathogen#infect() " use pathogen
-colorscheme molokai
-let g:molokai_original = 1
+set title
+set titleold="Terminal"
+set titlestring=%F
 
-" open ag.vim
-nnoremap <leader>a :Ag
+" Status line settings
+set laststatus=2
+set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
 
-"CtrlP settings
-nnoremap <leader>P :CtrlP<CR>
+" vim-airline
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_skip_empty_sections = 1
+
+" ctrlp
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" tsc
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = '--jsx=react'
-autocmd FileType typescript :set makeprg=tsc
-let g:tsuquyomi_completion_detail = 1
-autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
-autocmd FileType typescript nmap <buffer> <Leader>E <Plug>(TsuquyomiRenameSymbolC)
+"
+" move vertically by lines on terminal
+nnoremap j gj
+nnoremap k gk
+
+" airline settings
+let g:airline_powerline_fonts = 1
+let g:airline_theme='murmur'
+
+" jk is escape
+inoremap jk <esc>
+
+" language client servr settings
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/ra_lsp_server'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    \ }
+let g:deoplete#enable_at_startup = 1
+let g:neosnippet#enable_complete_done = 1
+
+silent! colorscheme molokai
+
+" ale
+let g:ale_linters = {}
 
 let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
-  set ballooneval
-  autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
   if os == "Darwin"
     set guifont=Hack:h12
   else
