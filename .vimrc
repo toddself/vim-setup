@@ -31,7 +31,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb'
 
@@ -179,14 +179,27 @@ let g:airline_theme='murmur'
 inoremap jk <esc>
 
 " language client servr settings
+let tsserver = system('echo -n $(npm config get prefix)/bin/javascript-typescript-stdio')
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/ra_lsp_server'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'typescript': [tsserver],
+    \ 'javascript': [tsserver],
+    \ 'javascript.jsx': [tsserver],
     \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
     \ }
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_complete_done = 1
+
+function LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  endif
+endfunction
+
+autocmd FileType * call LC_maps()
 
 silent! colorscheme molokai
 
