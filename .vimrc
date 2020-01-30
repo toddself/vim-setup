@@ -181,8 +181,9 @@ inoremap jk <esc>
 
 " language client servr settings
 let tsserver = system('echo -n $(npm config get prefix)/bin/javascript-typescript-stdio')
+let ra_lsp_server = system('echo -n $HOME/.cargo/bin/ra_lsp_server')
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/ra_lsp_server'],
+    \ 'rust': [ra_lsp_server],
     \ 'typescript': [tsserver],
     \ 'javascript': [tsserver],
     \ 'javascript.jsx': [tsserver],
