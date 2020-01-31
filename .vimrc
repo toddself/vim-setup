@@ -31,9 +31,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
-"Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb'
+Plug 'sjl/gundo.vim'
 
 " Make autocomplete happen 
 Plug 'autozimu/LanguageClient-neovim', {
@@ -109,6 +109,9 @@ set expandtab
 "" Map leader to ,
 let mapleader=','
 
+"Gundo
+nnoremap <leader>u  :GundoToggle<CR>
+
 "" Enable hidden buffers
 set hidden
 
@@ -182,15 +185,19 @@ inoremap jk <esc>
 " language client servr settings
 let tsserver = system('echo -n $(npm config get prefix)/bin/javascript-typescript-stdio')
 let ra_lsp_server = system('echo -n $HOME/.cargo/bin/ra_lsp_server')
+let solargraph = system('echo -n $(which solargraph)')
 let g:LanguageClient_serverCommands = {
     \ 'rust': [ra_lsp_server],
     \ 'typescript': [tsserver],
     \ 'javascript': [tsserver],
     \ 'javascript.jsx': [tsserver],
-    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    \ 'ruby': [solargraph, 'stdio'],
     \ }
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_complete_done = 1
+let g:deoplete#auto_complete_delay = 500
+
+
 
 function LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
