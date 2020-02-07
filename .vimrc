@@ -34,6 +34,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb'
 Plug 'sjl/gundo.vim'
+Plug 'dense-analysis/ale'
 
 " Make autocomplete happen 
 Plug 'autozimu/LanguageClient-neovim', {
@@ -111,6 +112,13 @@ let mapleader=','
 
 "Gundo
 nnoremap <leader>u  :GundoToggle<CR>
+
+" ALE
+let rubocop = system('echo -n $(which rubocop)')
+let g:ale_linters = {'ruby': [rubocop]}
+let g:ale_linters_explicit = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_disable_lsp = 1
 
 "" Enable hidden buffers
 set hidden
