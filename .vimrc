@@ -224,6 +224,9 @@ silent! colorscheme molokai
 
 autocmd FileType ruby,typescript,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 
+" buffer switcher
+:nnoremap <leader>b :buffers<CR>:buffer<Space>
+
 let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
   if os == "Darwin"
