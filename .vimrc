@@ -22,7 +22,6 @@ endif
 " Required:
 call plug#begin(expand('~/.vim/plugged'))
 
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -35,6 +34,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb'
 Plug 'sjl/gundo.vim'
 Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
 
 " Make autocomplete happen 
 Plug 'autozimu/LanguageClient-neovim', {
@@ -174,12 +174,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
-" ctrlp
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
 "
 " move vertically by lines on terminal
 nnoremap j gj
@@ -191,6 +185,10 @@ let g:airline_theme='murmur'
 
 " jk is escape
 inoremap jk <esc>
+
+" nerdtree
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " language client servr settings
 let tsserver = system('echo -n $(npm config get prefix)/bin/javascript-typescript-stdio')
@@ -206,8 +204,6 @@ let g:LanguageClient_serverCommands = {
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_complete_done = 1
 let g:deoplete#auto_complete_delay = 500
-
-
 
 function LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
@@ -226,6 +222,14 @@ autocmd FileType ruby,typescript,javascript autocmd BufWritePre <buffer> %s/\s\+
 
 " buffer switcher
 :nnoremap <leader>b :buffers<CR>:buffer<Space>
+
+" use fzf instead of ctrl-p
+nnoremap <C-p> :Files<CR>
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#files('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), fzf#vim#with_preview(), <bang>0)
+endif
 
 let os = substitute(system('uname'), "\n", "", "")
 if has("gui_running")
